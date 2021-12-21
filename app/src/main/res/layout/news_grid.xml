@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="235dp"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_width="174dp"
+        android:layout_height="174dp"
+        app:cardCornerRadius="16dp">
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/news1"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/title"
+        android:paddingHorizontal="10dp"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Volumizing Brow Waterproof"/>
+    <TextView
+        android:id="@+id/text"
+        android:paddingHorizontal="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:drawablePadding="4dp"
+        android:text="alip"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
