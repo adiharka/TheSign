@@ -18,12 +18,6 @@ class NewsDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_detail)
-//        val intent = intent
-//        val imgNews = intent.getIntExtra("img")
-//        val titleNews = intent.getStringExtra("title")
-//        val textNews = intent.getStringExtra("text")
-
-
 
         val extras = intent.extras
         val imgNews = extras!!.getInt("img")

@@ -4,11 +4,25 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_account.*
 
 class Account : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account)
+        val contactBtn = findViewById<TextView>(R.id.contactBtn)
+        contactBtn.setOnClickListener {
+            val intent = Intent(this, ContactSupport::class.java)
+            startActivity(intent)
+        }
+        val logoutBtn = findViewById<ImageButton>(R.id.logoutBtn)
+        logoutBtn.setOnClickListener {
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         val categoryBtn = findViewById<ImageButton>(R.id.category)
         categoryBtn.setOnClickListener {
             val intent = Intent(this, Category::class.java)

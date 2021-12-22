@@ -10,6 +10,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.kuliah.thesign.R
 import com.kuliah.thesign.model.GalleryItem
+import androidx.core.content.ContextCompat.startActivity
+
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat
+
 
 class GalleryAdapter(var context: Context, var arrayList: ArrayList<GalleryItem>) :
     RecyclerView.Adapter<GalleryAdapter.ItemHolder>()  {
@@ -30,6 +36,13 @@ class GalleryAdapter(var context: Context, var arrayList: ArrayList<GalleryItem>
 
         holder.img.setOnClickListener {
             Toast.makeText(context, galleryItem.creatorGallery, Toast.LENGTH_LONG).show()
+        }
+        holder.phone.setOnClickListener {
+            val context = holder.phone.context
+            val Url: String = "https://api.whatsapp.com/send?phone=${galleryItem.phoneGallery}"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(Url)
+            context.startActivity(intent)
         }
     }
 

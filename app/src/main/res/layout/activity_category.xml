@@ -30,21 +30,21 @@
         app:layout_constraintTop_toBottomOf="@+id/ideas">
 
         <ImageButton
-            android:id="@+id/bankdarah"
+            android:id="@+id/bedroom"
             android:layout_width="174dp"
             android:layout_height="174dp"
             android:background="@null"
             app:srcCompat="@drawable/cat_bedroom"
             tools:ignore="SpeakableTextPresentCheck" />
         <ImageButton
-            android:id="@+id/donordarah"
+            android:id="@+id/bathroom"
             android:layout_width="174dp"
             android:layout_height="174dp"
             android:background="@null"
             app:srcCompat="@drawable/cat_bathroom"
             tools:ignore="SpeakableTextPresentCheck" />
         <ImageButton
-            android:id="@+id/wikidonor"
+            android:id="@+id/livingroom"
             android:layout_width="174dp"
             android:layout_height="174dp"
             android:layout_gravity="center_horizontal"
@@ -90,19 +90,19 @@
             android:divider="@drawable/category_divider"
             android:showDividers="middle">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/cat_colorful"
                 android:layout_width="112dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/cat_colorful" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/cat_luxury"
                 android:layout_width="112dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/cat_luxury" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/cat_monochrome"
                 android:layout_width="112dp"
                 android:layout_height="wrap_content"

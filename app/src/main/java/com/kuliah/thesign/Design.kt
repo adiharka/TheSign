@@ -3,7 +3,9 @@ package com.kuliah.thesign
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,12 +23,21 @@ class Design : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_design)
 
+        val extras = intent.extras
+        val category = extras?.getString("category")
+
+        if(category!=null) {
+            var text = findViewById<TextView>(R.id.categoryText)
+            text.setVisibility(View.VISIBLE)
+            text.text = category
+        }
+
         recyclerView = findViewById(R.id.gallery_recycler)
         gridLayoutManager = GridLayoutManager(applicationContext, 2, LinearLayoutManager.VERTICAL, false)
         recyclerView?.layoutManager = gridLayoutManager
         recyclerView?.setHasFixedSize(true)
         arrayList = ArrayList()
-        arrayList = setDataInList()
+        arrayList = setDataInList(category)
         galleryAdapter = GalleryAdapter(applicationContext, arrayList!!)
         recyclerView?.adapter = galleryAdapter
 
@@ -51,15 +62,43 @@ class Design : AppCompatActivity() {
         }
     }
 
-    private fun setDataInList() : ArrayList<GalleryItem> {
+    private fun setDataInList(category: String?) : ArrayList<GalleryItem> {
         var items:ArrayList<GalleryItem> = ArrayList()
 
-        items.add(GalleryItem(R.drawable.gal1, "Volumizing Brow Waterproof ", "Alifia","0812356823332"))
-        items.add(GalleryItem(R.drawable.gal2, "Modern Bathroom Monochrome", "Alifia","0812356823332"))
-        items.add(GalleryItem(R.drawable.gal3, "La Casa 16th Century ", "Ninet","0812442323394"))
-        items.add(GalleryItem(R.drawable.gal4, "Countryside Kitchen Style", "Ninet","0812442323394"))
-        items.add(GalleryItem(R.drawable.gal5, "Brightening Toner Summer Collection", "Alifia","0812356823332"))
-
+        if (category == "Bathroom" || category == "Monochrome" || category == null) {
+            items.add(GalleryItem(R.drawable.gal2, "Modern Bathroom Monochrome", "Alifia","0812356823332"))
+        }
+        if (category == "Livingroom" || category == "Colorful" || category == null) {
+            items.add(GalleryItem(R.drawable.gal4, "Countryside Kitchen Style", "Ninet","0812442323394"))
+        }
+        if (category == "Livingroom" || category == "Luxury" || category == null) {
+            items.add(
+                GalleryItem(
+                    R.drawable.gal1,
+                    "Volumizing Brow Waterproof ",
+                    "Alifia",
+                    "0812356823332"
+                )
+            )
+            items.add(
+                GalleryItem(
+                    R.drawable.gal3,
+                    "La Casa 16th Century ",
+                    "Ninet",
+                    "0812442323394"
+                )
+            )
+        }
+        if (category == "Bedroom" || category == "Luxury" || category == null) {
+            items.add(
+                GalleryItem(
+                    R.drawable.gal5,
+                    "Brightening Toner Summer Collection",
+                    "Alifia",
+                    "0812356823332"
+                )
+            )
+        }
         return items
     }
 }

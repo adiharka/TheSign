@@ -105,11 +105,19 @@
         app:layout_constraintTop_toBottomOf="@id/reply1"
         android:layout_marginVertical="16dp"
         android:background="#c0c0c0"/>
+    <TextView
+        android:id="@+id/hinttext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:text="Reply forum"/>
     <EditText
         android:id="@+id/forumText"
         android:padding="16dp"
         android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/line"
+        app:layout_constraintTop_toBottomOf="@+id/hinttext"
         android:background="@drawable/cardbrown"
         android:layout_width="match_parent"
         android:layout_height="100dp"/>
