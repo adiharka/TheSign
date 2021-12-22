@@ -11,6 +11,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val forumBtn = findViewById<ImageButton>(R.id.forum)
+        forumBtn.setOnClickListener {
+            val intent = Intent(this, Forum::class.java)
+            startActivity(intent)
+        }
         val designBtn = findViewById<ImageButton>(R.id.design)
         designBtn.setOnClickListener {
             val intent = Intent(this, Design::class.java)

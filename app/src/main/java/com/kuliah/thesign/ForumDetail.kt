@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 
-class ContactSupport : AppCompatActivity() {
+class ForumDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_support)
+        setContentView(R.layout.activity_forum_detail)
+
 
         val categoryBtn = findViewById<ImageButton>(R.id.category)
         categoryBtn.setOnClickListener {

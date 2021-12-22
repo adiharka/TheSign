@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F9F7F7"
-    tools:context=".Forum">
+    tools:context=".ForumDetail">
 
     <ImageView
         android:id="@+id/logo"
@@ -15,6 +15,7 @@
         android:paddingVertical="40dp"/>
 
     <LinearLayout
+        android:id="@id/forum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/logo"
@@ -48,9 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:text="Recommended bedroom with a minimalist theme"
             android:drawablePadding="4dp"
-            app:drawableStartCompat="@drawable/textmisc"
-            android:text="Recommended bedroom with a minimalist theme"/>
+            app:drawableStartCompat="@drawable/textmisc" />
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
@@ -68,19 +69,60 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:gravity="center"
-            android:drawableStart="@drawable/ic_baseline_reply_24"
-            android:text="1 Balasan"/>
+            android:text="1 Balasan"
+            app:drawableStartCompat="@drawable/ic_baseline_reply_24" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/reply1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/forum"
+        android:background="@drawable/cardbrown"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_margin="12dp"
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fagialks_opire"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate scelerisque malesuada in amet in elit laoreet."
+            />
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/reply1"
+        android:layout_marginVertical="16dp"
+        android:background="#c0c0c0"/>
+    <EditText
+        android:id="@+id/forumText"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/line"
+        android:background="@drawable/cardbrown"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
     <ImageButton
-        android:id="@+id/ctaBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        android:src="@drawable/cta"
         android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/navbar"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:src="@drawable/reply_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/forumText" />
+
 
     <LinearLayout
         android:id="@+id/navbar"

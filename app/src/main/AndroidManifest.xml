@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheSign">
         <activity
+            android:name=".ForumCreate"
+            android:exported="false" />
+        <activity
+            android:name=".ForumDetail"
+            android:exported="false" />
+        <activity
             android:name=".Forum"
             android:exported="false" />
         <activity

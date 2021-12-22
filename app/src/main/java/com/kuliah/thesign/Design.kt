@@ -1,7 +1,9 @@
 package com.kuliah.thesign
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +29,26 @@ class Design : AppCompatActivity() {
         arrayList = setDataInList()
         galleryAdapter = GalleryAdapter(applicationContext, arrayList!!)
         recyclerView?.adapter = galleryAdapter
+
+
+        val categoryBtn = findViewById<ImageButton>(R.id.category)
+        categoryBtn.setOnClickListener {
+            val intent = Intent(this, Category::class.java)
+            startActivity(intent)
+            finish()
+        }
+        val homeBtn = findViewById<ImageButton>(R.id.home)
+        homeBtn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        val accountBtn = findViewById<ImageButton>(R.id.account)
+        accountBtn.setOnClickListener {
+            val intent = Intent(this, Account::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setDataInList() : ArrayList<GalleryItem> {
