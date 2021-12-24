@@ -3,13 +3,22 @@ package com.kuliah.thesign
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
+import android.widget.TextView
+import com.kuliah.thesign.database.DatabaseHandler
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val databaseHandler = DatabaseHandler(this)
+        val akun_id = databaseHandler.checkAccount()
+        Log.d("CREATION", "Account logged id:$akun_id")
+
+        findViewById<TextView>(R.id.name).text = databaseHandler.getUname(akun_id)
 
         val forumBtn = findViewById<ImageButton>(R.id.forum)
         forumBtn.setOnClickListener {

@@ -3,14 +3,21 @@ package com.kuliah.thesign
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
+import com.kuliah.thesign.database.DatabaseHandler
 import kotlinx.android.synthetic.main.activity_account.*
 
 class Account : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account)
+
+        val databaseHandler = DatabaseHandler(this)
+        val akun_id = databaseHandler.checkAccount()
+        Log.d("CREATION", "Account logged id:$akun_id")
+
         val contactBtn = findViewById<TextView>(R.id.contactBtn)
         contactBtn.setOnClickListener {
             val intent = Intent(this, ContactSupport::class.java)
@@ -18,6 +25,7 @@ class Account : AppCompatActivity() {
         }
         val logoutBtn = findViewById<ImageButton>(R.id.logoutBtn)
         logoutBtn.setOnClickListener {
+            databaseHandler.logoutAccount(akun_id)
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
             finish()
