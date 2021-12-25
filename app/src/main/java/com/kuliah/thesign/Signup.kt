@@ -20,16 +20,22 @@ class Signup : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.passForm)
         val uname = findViewById<EditText>(R.id.unameForm)
 
+
         val register = findViewById<ImageButton>(R.id.signupBtn)
         register.setOnClickListener {
-            val status = databaseHandler.createAccount(email.text.toString(), password.text.toString(), uname.text.toString())
-            Log.d("CREATION", "Create account mail,pass,uname - " + email.text.toString() + password.text.toString() + uname.text.toString())
-            if (status) {
-                Toast.makeText(getApplicationContext(), "Sukses mendaftar", Toast.LENGTH_LONG).show();
-                finish()
-            } else {
-                Toast.makeText(getApplicationContext(), "Username/email sudah dipakai", Toast.LENGTH_LONG).show();
+            if (email.text.toString().trim().isNotEmpty() && password.text.toString().trim().isNotEmpty() && uname.text.toString().trim().isNotEmpty()) {
+                    val status = databaseHandler.createAccount(email.text.toString(), password.text.toString(), uname.text.toString())
+                    Log.d("CREATION", "Create account mail,pass,uname - " + email.text.toString() + password.text.toString() + uname.text.toString())
+                    if (status) {
+                        Toast.makeText(this, "Sukses mendaftar", Toast.LENGTH_LONG).show();
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Username/email sudah dipakai", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                Toast.makeText(this, "Mohon isi semua kolom", Toast.LENGTH_SHORT).show();
             }
+
         }
 
         val loginBtn = findViewById<TextView>(R.id.loginBtn)

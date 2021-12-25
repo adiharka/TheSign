@@ -152,7 +152,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         if (cursor.count > 0) {
             if (cursor.moveToFirst()) {
                 do {
-                    unameAccount = cursor.getString(cursor.getColumnIndexOrThrow(KEY_ACCOUNT_ID))
+                    unameAccount = cursor.getString(cursor.getColumnIndexOrThrow(KEY_UNAME))
                 } while (cursor.moveToNext())
             }
         }
