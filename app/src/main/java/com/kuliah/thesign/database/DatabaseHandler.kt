@@ -3,8 +3,11 @@ package com.kuliah.thesign.database
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.kuliah.thesign.model.ForumModelClass
+import com.kuliah.thesign.model.ReplyModelClass
 
 class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     DATABASE_NAME,null,
@@ -20,6 +23,19 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         private val KEY_UNAME = "username"
         private val KEY_PASSWORD = "password"
         private val KEY_LOGGED_IN = "logged_in"
+
+        private val TABLE_FORUM = "ForumTable"
+        private val KEY_FORUM_ID = "forum_id"
+        private val KEY_USERNAME = "username"
+        private val KEY_TOPIC = "topic"
+        private val KEY_CONTENT = "content"
+        private val KEY_REPLIES = "replies"
+
+        private val TABLE_REPLY = "ReplyTable"
+        private val KEY_REPLY_ID = "reply_id"
+        private val KEY_REPLY_FORUM_ID = "forum_id"
+        private val KEY_REPLY_USERNAME = "reply_username"
+        private val KEY_REPLY = "reply"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -27,6 +43,12 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         // creating table with fields
         val CREATE_ACCOUNT_TABLE = ("CREATE TABLE $TABLE_ACCOUNT($KEY_ACCOUNT_ID INTEGER PRIMARY KEY, $KEY_UNAME TEXT, $KEY_PASSWORD TEXT, $KEY_EMAIL TEXT, $KEY_LOGGED_IN INTEGER)")
         db?.execSQL(CREATE_ACCOUNT_TABLE)
+
+        val CREATE_FORUM_TABLE = ("CREATE TABLE $TABLE_FORUM($KEY_FORUM_ID INTEGER PRIMARY KEY, $KEY_USERNAME TEXT, $KEY_TOPIC TEXT, $KEY_CONTENT TEXT, $KEY_REPLIES INTEGER)")
+        db?.execSQL(CREATE_FORUM_TABLE)
+
+        val CREATE_REPLY_TABLE = ("CREATE TABLE $TABLE_REPLY($KEY_REPLY_ID INTEGER PRIMARY KEY, $KEY_REPLY_FORUM_ID INTEGER, $KEY_REPLY_USERNAME TEXT, $KEY_REPLY TEXT)")
+        db?.execSQL(CREATE_REPLY_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -160,6 +182,106 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         cursor.close()
         db.close()
         return unameAccount
+    }
+
+    // Create new Forum
+    fun createForum(uname:String, topic: String, content: String): Boolean {
+        val db = this.writableDatabase
+        val addQuery = "INSERT INTO $TABLE_FORUM($KEY_USERNAME, $KEY_TOPIC, $KEY_CONTENT, $KEY_REPLIES) values('$uname', '$topic', '$content', 0);"
+        val cursor: Cursor = db.rawQuery(addQuery, null)
+
+        Log.d("CREATION", "Create forum, uname:$topic")
+        Log.d("CREATION", addQuery)
+        try {
+            if (cursor.moveToFirst()) {
+            }
+        } finally {
+            cursor.close()
+        }
+        db.close()
+        return true
+    }
+
+    // GET list forum
+    fun getForum(): List<ForumModelClass> {
+        val empList: ArrayList<ForumModelClass> = ArrayList<ForumModelClass>()
+        val selectQuery = "SELECT * FROM $TABLE_FORUM "
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+        if (cursor.moveToFirst()) {
+            do {
+                val emp = ForumModelClass(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_FORUM_ID)),
+                    username = cursor.getString(cursor.getColumnIndexOrThrow(KEY_USERNAME)) ,
+                    topic = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOPIC)),
+                    content = cursor.getString(cursor.getColumnIndexOrThrow(KEY_CONTENT)),
+                    replies = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_REPLIES)),
+                    )
+                empList.add(emp)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return empList
+    }
+
+    // Create new Reply
+    fun createReply(forum_id: Int, uname:String,  content: String): Boolean {
+        val db = this.writableDatabase
+        val addQuery = "INSERT INTO $TABLE_REPLY($KEY_REPLY_FORUM_ID, $KEY_REPLY_USERNAME, $KEY_REPLY) values('$forum_id', '$uname', '$content');"
+        val updateQuery = "UPDATE $TABLE_FORUM SET $KEY_REPLIES = $KEY_REPLIES + 1 WHERE $KEY_FORUM_ID = $forum_id ;"
+        var cursor: Cursor = db.rawQuery(addQuery, null)
+        var cursor2: Cursor = db.rawQuery(updateQuery, null)
+
+        Log.d("CREATION", "Create reply, forum:$forum_id uname:$uname")
+        Log.d("CREATION", addQuery)
+        Log.d("CREATION", updateQuery)
+        try {
+            if (cursor.moveToFirst()) {
+            }
+        } finally {
+            cursor.close()
+        }
+        try {
+            if (cursor2.moveToFirst()) {
+            }
+        } finally {
+            cursor2.close()
+        }
+        db.close()
+        return true
+    }
+
+    // GET list reply
+    fun getReply(id: Int): List<ReplyModelClass> {
+        val empList: ArrayList<ReplyModelClass> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_REPLY WHERE $KEY_REPLY_FORUM_ID = $id"
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+        if (cursor.moveToFirst()) {
+            do {
+                val emp = ReplyModelClass(
+                    username = cursor.getString(cursor.getColumnIndexOrThrow(KEY_REPLY_USERNAME)) ,
+                    reply = cursor.getString(cursor.getColumnIndexOrThrow(KEY_REPLY)),
+                )
+                empList.add(emp)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return empList
     }
 
 }

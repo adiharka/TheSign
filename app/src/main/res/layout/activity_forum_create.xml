@@ -29,12 +29,13 @@
             android:drawablePadding="4dp"
             app:drawableStartCompat="@drawable/textmisc" />
         <EditText
+            android:id="@+id/topic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <EditText
-        android:id="@+id/forumText"
+        android:id="@+id/content"
         android:padding="16dp"
         android:layout_margin="16dp"
         app:layout_constraintTop_toBottomOf="@+id/title"
@@ -43,13 +44,14 @@
         android:layout_height="150dp"/>
 
     <ImageButton
+        android:id="@+id/postBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
         android:layout_margin="16dp"
         android:src="@drawable/post_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forumText" />
+        app:layout_constraintTop_toBottomOf="@id/content" />
 
     <LinearLayout
         android:id="@+id/navbar"
