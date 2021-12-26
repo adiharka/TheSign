@@ -20,14 +20,11 @@
             android:layout_marginBottom="8dp"
             android:src="@drawable/profile_pic"/>
         <TextView
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:text="Lee Jeno"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile >"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/menu"
@@ -40,20 +37,35 @@
         android:paddingHorizontal="32dp"
         android:background="@drawable/cardbrown">
         <TextView
+            android:id="@+id/favouriteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp"
+            android:drawablePadding="10dp"
+            android:text="My Favourite"
+            android:textSize="20sp"
+            app:drawableStartCompat="@drawable/ic_outline_favorite_border_24"
+            app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
+        <TextView
             android:id="@+id/contactBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:layout_marginBottom="12dp"
             android:drawablePadding="10dp"
+            android:textSize="20sp"
             android:text="Contact Support"
-            app:drawableStartCompat="@drawable/ic_baseline_help_outline_24" />
+            app:drawableStartCompat="@drawable/ic_baseline_help_outline_24"
+            app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24"/>
         <ImageButton
             android:id="@+id/logoutBtn"
             android:background="@null"
+            android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logout_btn"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="36dp"/>
     </LinearLayout>
 
     <LinearLayout

@@ -17,7 +17,14 @@ class Account : AppCompatActivity() {
         val databaseHandler = DatabaseHandler(this)
         val akun_id = databaseHandler.checkAccount()
         Log.d("CREATION", "Account logged id:$akun_id")
+        findViewById<TextView>(R.id.username).text = databaseHandler.getUname(akun_id)
 
+        val favouriteBtn = findViewById<TextView>(R.id.favouriteBtn)
+        favouriteBtn.setOnClickListener {
+            val intent = Intent(this, Design::class.java)
+            intent.putStringArrayListExtra("favourite", databaseHandler.getFavourite(akun_id))
+            startActivity(intent)
+        }
         val contactBtn = findViewById<TextView>(R.id.contactBtn)
         contactBtn.setOnClickListener {
             val intent = Intent(this, ContactSupport::class.java)

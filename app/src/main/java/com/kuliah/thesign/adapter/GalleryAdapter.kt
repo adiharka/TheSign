@@ -15,6 +15,8 @@ import androidx.core.content.ContextCompat.startActivity
 import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat
+import com.kuliah.thesign.Design
+import com.kuliah.thesign.database.DatabaseHandler
 
 
 class GalleryAdapter(var context: Context, var arrayList: ArrayList<GalleryItem>) :
@@ -30,12 +32,18 @@ class GalleryAdapter(var context: Context, var arrayList: ArrayList<GalleryItem>
         var galleryItem : GalleryItem = arrayList.get(position)
 
         holder.img.setImageResource(galleryItem.imgGallery!!)
+        holder.id.text = galleryItem.idGallery.toString()
         holder.text.text = galleryItem.textGallery
         holder.creator.text = galleryItem.creatorGallery
         holder.phone.text = galleryItem.phoneGallery
 
         holder.img.setOnClickListener {
-            Toast.makeText(context, galleryItem.creatorGallery, Toast.LENGTH_LONG).show()
+            val databaseHandler: DatabaseHandler = DatabaseHandler(holder.img.context)
+            if(databaseHandler.favourite(databaseHandler.checkAccount(), galleryItem.idGallery!!)) {
+                Toast.makeText(context, "Sukses menambahkan ke favorit", Toast.LENGTH_SHORT).show()
+            }else {
+                Toast.makeText(context, "Sukses menghapus dari favorit", Toast.LENGTH_SHORT).show()
+            }
         }
         holder.phone.setOnClickListener {
             val context = holder.phone.context
@@ -52,6 +60,7 @@ class GalleryAdapter(var context: Context, var arrayList: ArrayList<GalleryItem>
 
     class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var img = itemView.findViewById<ImageView>(R.id.img)
+        var id = itemView.findViewById<TextView>(R.id.id)
         var text = itemView.findViewById<TextView>(R.id.text)
         var creator = itemView.findViewById<TextView>(R.id.creator)
         var phone = itemView.findViewById<TextView>(R.id.phone)

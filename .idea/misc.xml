@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.35104166666666664" />
         <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/drawable/cardbrown.xml" value="0.34444444444444444" />
         <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/drawable/cardwhite.xml" value="0.34444444444444444" />
         <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/drawable/category_divider.xml" value="0.2" />
         <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/drawable/empty_tall_divider.xml" value="0.34444444444444444" />
         <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/drawable/ic_outline_phone_24.xml" value="0.34444444444444444" />
+        <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/drawable/ic_thesign_svg.xml" value="0.35104166666666664" />
         <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/drawable/whitecard.xml" value="0.34564102564102567" />
         <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/layout/activity_account.xml" value="0.20244565217391305" />
         <entry key="..\:/Kuliah/PemobPrak/TheSign/app/src/main/res/layout/activity_category.xml" value="0.2264151024877837" />

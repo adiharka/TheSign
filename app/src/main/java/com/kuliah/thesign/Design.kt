@@ -3,6 +3,7 @@ package com.kuliah.thesign
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -24,12 +25,24 @@ class Design : AppCompatActivity() {
         setContentView(R.layout.activity_design)
 
         val extras = intent.extras
-        val category = extras?.getString("category")
+        var category = extras?.getString("category")
+        var fav = extras?.getStringArrayList("favourite")
+//        fav ?:listOf("0")
+        val teks = "My Favourite"
 
         if(category!=null) {
             var text = findViewById<TextView>(R.id.categoryText)
             text.setVisibility(View.VISIBLE)
             text.text = category
+            fav = arrayListOf("-1")
+        } else if(fav!=null) {
+            var text = findViewById<TextView>(R.id.categoryText)
+            text.setVisibility(View.VISIBLE)
+            category = "-1"
+            text.text = teks
+        } else {
+            fav = arrayListOf("-1")
+            category = null
         }
 
         recyclerView = findViewById(R.id.gallery_recycler)
@@ -37,10 +50,10 @@ class Design : AppCompatActivity() {
         recyclerView?.layoutManager = gridLayoutManager
         recyclerView?.setHasFixedSize(true)
         arrayList = ArrayList()
-        arrayList = setDataInList(category)
+        arrayList = setDataInList(category, fav)
         galleryAdapter = GalleryAdapter(applicationContext, arrayList!!)
         recyclerView?.adapter = galleryAdapter
-
+        recyclerView?.adapter!!.notifyDataSetChanged()
 
         val categoryBtn = findViewById<ImageButton>(R.id.category)
         categoryBtn.setOnClickListener {
@@ -62,37 +75,40 @@ class Design : AppCompatActivity() {
         }
     }
 
-    private fun setDataInList(category: String?) : ArrayList<GalleryItem> {
+    private fun setDataInList(category: String?, fav: ArrayList<String>) : ArrayList<GalleryItem> {
         var items:ArrayList<GalleryItem> = ArrayList()
 
-        if (category == "Bathroom" || category == "Monochrome" || category == null) {
-            items.add(GalleryItem(R.drawable.gal2, "Modern Bathroom Monochrome", "Alifia","0812356823332"))
+        if ("1" in fav || category == "Bathroom" || category == "Monochrome" || category == null) {
+            items.add(GalleryItem(R.drawable.gal2,
+                1,
+                "Modern Bathroom Monochrome", "Alifia","0812356823332"))
         }
-        if (category == "Livingroom" || category == "Colorful" || category == null) {
-            items.add(GalleryItem(R.drawable.gal4, "Countryside Kitchen Style", "Ninet","0812442323394"))
+        if ("2" in fav || category == "Livingroom" || category == "Colorful" || category == null) {
+            items.add(GalleryItem(R.drawable.gal4,
+                2,
+                "Countryside Kitchen Style", "Ninet","0812442323394"))
         }
-        if (category == "Livingroom" || category == "Luxury" || category == null) {
-            items.add(
-                GalleryItem(
-                    R.drawable.gal1,
+        if ("3" in fav || category == "Livingroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal1,
+                    3,
                     "Volumizing Brow Waterproof ",
                     "Alifia",
                     "0812356823332"
                 )
             )
-            items.add(
-                GalleryItem(
-                    R.drawable.gal3,
+        }
+        if ("4" in fav || category == "Livingroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal3,
+                    4,
                     "La Casa 16th Century ",
                     "Ninet",
                     "0812442323394"
                 )
             )
         }
-        if (category == "Bedroom" || category == "Luxury" || category == null) {
-            items.add(
-                GalleryItem(
-                    R.drawable.gal5,
+        if ("5" in fav || category == "Bedroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal5,
+                    5,
                     "Brightening Toner Summer Collection",
                     "Alifia",
                     "0812356823332"

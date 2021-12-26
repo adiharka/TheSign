@@ -14,7 +14,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
     DATABASE_VERSION
 ) {
     companion object {
-        private val DATABASE_VERSION = 1
+        private val DATABASE_VERSION = 2
         private val DATABASE_NAME = "TheSignDatabase"
 
         private val TABLE_ACCOUNT = "AccountTable"
@@ -23,6 +23,11 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         private val KEY_UNAME = "username"
         private val KEY_PASSWORD = "password"
         private val KEY_LOGGED_IN = "logged_in"
+
+        private val TABLE_FAVOURITE = "FavoriteTable"
+        private val KEY_FAVOURITE_ID = "favourite_id"
+        private val KEY_FAV_ACCOUNT_ID = "account_id"
+        private val KEY_FAV_ITEM_ID = "item_id"
 
         private val TABLE_FORUM = "ForumTable"
         private val KEY_FORUM_ID = "forum_id"
@@ -44,6 +49,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         val CREATE_ACCOUNT_TABLE = ("CREATE TABLE $TABLE_ACCOUNT($KEY_ACCOUNT_ID INTEGER PRIMARY KEY, $KEY_UNAME TEXT, $KEY_PASSWORD TEXT, $KEY_EMAIL TEXT, $KEY_LOGGED_IN INTEGER)")
         db?.execSQL(CREATE_ACCOUNT_TABLE)
 
+        val CREATE_FAVOURITE_TABLE = ("CREATE TABLE $TABLE_FAVOURITE($KEY_FAVOURITE_ID INTEGER PRIMARY KEY, $KEY_FAV_ACCOUNT_ID INTEGER, $KEY_FAV_ITEM_ID INTEGER)")
+        db?.execSQL(CREATE_FAVOURITE_TABLE)
+
         val CREATE_FORUM_TABLE = ("CREATE TABLE $TABLE_FORUM($KEY_FORUM_ID INTEGER PRIMARY KEY, $KEY_USERNAME TEXT, $KEY_TOPIC TEXT, $KEY_CONTENT TEXT, $KEY_REPLIES INTEGER)")
         db?.execSQL(CREATE_FORUM_TABLE)
 
@@ -53,6 +61,9 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS $TABLE_ACCOUNT")
+        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_FAVOURITE")
+        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_FORUM")
+        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_REPLY")
         onCreate(db)
     }
 
@@ -70,7 +81,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
             db.close()
             return false
         } else {
-            val addQuery = "INSERT INTO $TABLE_ACCOUNT($KEY_UNAME, $KEY_PASSWORD, $KEY_EMAIL, $KEY_LOGGED_IN) values('$email', '$pass', '$uname', -1);"
+            val addQuery = "INSERT INTO $TABLE_ACCOUNT($KEY_EMAIL, $KEY_PASSWORD, $KEY_UNAME, $KEY_LOGGED_IN) values('$email', '$pass', '$uname', -1);"
             val cursor: Cursor = db.rawQuery(addQuery, null)
 
             Log.d("CREATION", "Create account, uname:$uname, email:$email, pass:$pass")
@@ -284,4 +295,61 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context,
         return empList
     }
 
+    // Tambah favorit
+    fun favourite(user_id: Int, item_id: Int): Boolean {
+        val db = this.writableDatabase
+
+        val checkQuery = "SELECT 1 FROM $TABLE_FAVOURITE WHERE $KEY_FAV_ACCOUNT_ID = $user_id AND $KEY_FAV_ITEM_ID = $item_id ;"
+        val cursor: Cursor = db.rawQuery(checkQuery, null)
+        var updateQuery: String
+        updateQuery = "INSERT INTO $TABLE_FAVOURITE ($KEY_FAV_ACCOUNT_ID, $KEY_FAV_ITEM_ID) values($user_id, $item_id);"
+        var newFav = true
+        if (cursor.count > 0) {
+            updateQuery =
+                "DELETE FROM $TABLE_FAVOURITE WHERE $KEY_FAV_ACCOUNT_ID = $user_id AND $KEY_FAV_ITEM_ID = $item_id;"
+            newFav = false
+        }
+
+        val cursor2: Cursor = db.rawQuery(updateQuery, null)
+        val count = cursor.count
+
+        var sum = 0
+        if (cursor2 != null) {
+            try {
+                if (cursor2.moveToFirst()) {
+                    sum = cursor2.getInt(0)
+                }
+            } finally {
+                cursor2.close()
+            }
+        }
+
+        Log.d("CREATION", "Click favourite user:$user_id item:$item_id")
+        Log.d("CREATION", "Update favourite query: $updateQuery")
+        cursor.close()
+        db.close()
+        return newFav
+    }
+
+    // GET list favourite
+    fun getFavourite(id: Int): ArrayList<String> {
+        val favList: ArrayList<String> = ArrayList()
+        val selectQuery = "SELECT * FROM $TABLE_FAVOURITE WHERE $KEY_FAV_ACCOUNT_ID = $id"
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLiteException) {
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+        if (cursor.moveToFirst()) {
+            do {
+                favList.add(cursor.getString(cursor.getColumnIndexOrThrow(KEY_FAV_ITEM_ID)))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return favList
+    }
 }

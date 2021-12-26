@@ -28,6 +28,12 @@ class Category : AppCompatActivity() {
             intent.putExtra("category", "Livingroom")
             startActivity(intent)
         }
+        val colorfulBtn = findViewById<ImageButton>(R.id.cat_colorful)
+        colorfulBtn.setOnClickListener {
+            val intent = Intent(this, Design::class.java)
+            intent.putExtra("category", "Colorful")
+            startActivity(intent)
+        }
         val luxuryBtn = findViewById<ImageButton>(R.id.cat_luxury)
         luxuryBtn.setOnClickListener {
             val intent = Intent(this, Design::class.java)

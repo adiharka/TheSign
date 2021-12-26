@@ -10,6 +10,12 @@
         android:layout_height="174dp"
         android:src="@drawable/gal1"/>
     <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:visibility="gone"/>
+    <TextView
         android:id="@+id/text"
         android:paddingHorizontal="10dp"
         android:layout_width="174dp"

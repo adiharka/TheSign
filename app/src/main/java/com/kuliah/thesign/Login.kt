@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import com.kuliah.thesign.database.DatabaseHandler
-import kotlinx.android.synthetic.main.activity_main.*
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,19 +18,19 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val uname = findViewById<EditText>(R.id.emailForm)
+        val email = findViewById<EditText>(R.id.emailForm)
         val password = findViewById<EditText>(R.id.passForm)
 
         val login = findViewById<ImageButton>(R.id.loginBtn)
         login.setOnClickListener {
-            val status = databaseHandler.loginAccount(uname.text.toString(), password.text.toString())
+            val status = databaseHandler.loginAccount(email.text.toString(), password.text.toString())
             if (status) {
                 val intent = Intent(this, MainActivity::class.java)
                 Toast.makeText(getApplicationContext(), "Sukses login", Toast.LENGTH_LONG).show();
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(getApplicationContext(), "Pastikan username dan password anda benar", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Pastikan username dan password anda benar", Toast.LENGTH_SHORT).show();
             }
         }
 
