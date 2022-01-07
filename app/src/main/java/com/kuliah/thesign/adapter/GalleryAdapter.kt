@@ -1,12 +1,11 @@
 package com.kuliah.thesign.adapter
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.kuliah.thesign.R
 import com.kuliah.thesign.model.GalleryItem
@@ -17,6 +16,14 @@ import android.net.Uri
 import androidx.core.content.ContextCompat
 import com.kuliah.thesign.Design
 import com.kuliah.thesign.database.DatabaseHandler
+
+import android.content.DialogInterface
+import android.graphics.Color
+
+import android.graphics.drawable.ColorDrawable
+import android.view.Window
+import android.widget.*
+import com.kuliah.thesign.NewsDetail
 
 
 class GalleryAdapter(var context: Context, var arrayList: ArrayList<GalleryItem>) :
@@ -38,6 +45,15 @@ class GalleryAdapter(var context: Context, var arrayList: ArrayList<GalleryItem>
         holder.phone.text = galleryItem.phoneGallery
 
         holder.img.setOnClickListener {
+            val context = holder.img.context
+            val alertadd = AlertDialog.Builder(context)
+            val factory = LayoutInflater.from(context)
+            val view: View = factory.inflate(R.layout.image_detail, null)
+            view.findViewById<ImageView>(R.id.dialog_imageview).setImageResource(galleryItem.imgGallery!!)
+            alertadd.setView(view)
+            alertadd.show()
+        }
+        holder.favourite.setOnClickListener {
             val databaseHandler: DatabaseHandler = DatabaseHandler(holder.img.context)
             if(databaseHandler.favourite(databaseHandler.checkAccount(), galleryItem.idGallery!!)) {
                 Toast.makeText(context, "Sukses menambahkan ke favorit", Toast.LENGTH_SHORT).show()
@@ -45,6 +61,7 @@ class GalleryAdapter(var context: Context, var arrayList: ArrayList<GalleryItem>
                 Toast.makeText(context, "Sukses menghapus dari favorit", Toast.LENGTH_SHORT).show()
             }
         }
+
         holder.phone.setOnClickListener {
             val context = holder.phone.context
             val Url: String = "https://api.whatsapp.com/send?phone=${galleryItem.phoneGallery}"
@@ -64,5 +81,6 @@ class GalleryAdapter(var context: Context, var arrayList: ArrayList<GalleryItem>
         var text = itemView.findViewById<TextView>(R.id.text)
         var creator = itemView.findViewById<TextView>(R.id.creator)
         var phone = itemView.findViewById<TextView>(R.id.phone)
+        var favourite = itemView.findViewById<ImageButton>(R.id.favouriteBtn)
     }
 }

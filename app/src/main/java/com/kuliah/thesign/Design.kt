@@ -90,30 +90,83 @@ class Design : AppCompatActivity() {
         }
         if ("3" in fav || category == "Livingroom" || category == "Luxury" || category == null) {
             items.add(GalleryItem(R.drawable.gal1,
-                    3,
-                    "Volumizing Brow Waterproof ",
-                    "Alifia",
-                    "0812356823332"
-                )
-            )
+                3,
+                "Volumizing Brow Waterproof ", "Alifia", "0812356823332"))
         }
         if ("4" in fav || category == "Livingroom" || category == "Luxury" || category == null) {
             items.add(GalleryItem(R.drawable.gal3,
-                    4,
-                    "La Casa 16th Century ",
-                    "Ninet",
-                    "0812442323394"
-                )
-            )
+                4,
+                "La Casa 16th Century ", "Ninet", "0812442323394"))
         }
         if ("5" in fav || category == "Bedroom" || category == "Luxury" || category == null) {
             items.add(GalleryItem(R.drawable.gal5,
-                    5,
-                    "Brightening Toner Summer Collection",
-                    "Alifia",
-                    "0812356823332"
-                )
-            )
+                5,
+                "Brightening Toner Summer Collection", "Alifia", "0812356823332"))
+        }
+        if ("6" in fav || category == "Bedroom" || category == "Monochrome" || category == null) {
+            items.add(GalleryItem(R.drawable.gal6,
+                6,
+                "Black Doom Bedroom", "Febrina", "081346331232"))
+        }
+        if ("7" in fav || category == "Bedroom" || category == "Monochrome" || category == null) {
+            items.add(GalleryItem(R.drawable.gal7,
+                7,
+                "Cozy Minimalist Bedroom", "Alifia", "0812356823332"))
+        }
+        if ("8" in fav || category == "Bedroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal8,
+                8,
+                "Girl Luxury Bedroom", "Alifia", "0812356823332"))
+        }
+        if ("9" in fav || category == "Bedroom" || category == "Monochrome" || category == null) {
+            items.add(GalleryItem(R.drawable.gal9,
+                9,
+                "Cozy Minimalist Bedroom", "Febrina", "081346331232"))
+        }
+        if ("10" in fav || category == "Bedroom" || category == "Monochrome" || category == null) {
+            items.add(GalleryItem(R.drawable.gal10,
+                10,
+                "Small Light Bedroom", "Alifia", "0812356823332"))
+        }
+        if ("12" in fav || category == "Bathroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal12,
+                12,
+                "Wooden Minimalist Bathroom", "Ninet", "081244232339"))
+        }
+        if ("13" in fav || category == "Bathroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal13,
+                13,
+                "Luxury Master Bathroom ", "Febrina", "081346331232"))
+        }
+        if ("14" in fav || category == "Bathroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal14,
+                14,
+                "Simple Small Bathroom ", "Febrina", "081346331232"))
+        }
+        if ("15" in fav || category == "Bathroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal15,
+                15,
+                "Brown Minimalist Bathroom", "Ninet", "081244232339"))
+        }
+        if ("16" in fav || category == "Bathroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal16,
+                16,
+                "Luxury Minimalist Bathroom", "Ninet", "081244232339"))
+        }
+        if ("17" in fav || category == "Livingroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal17,
+                17,
+                "Sphere Chandelier", "Ninet", "081244232339"))
+        }
+        if ("18" in fav || category == "Livingroom" || category == "Luxury" || category == null) {
+            items.add(GalleryItem(R.drawable.gal18,
+                18,
+                "Human Sans Livingroom", "Ninet", "081244232339"))
+        }
+        if ("19" in fav || category == "Livingroom" || category == "Monochrome" || category == null) {
+            items.add(GalleryItem(R.drawable.gal19,
+                19,
+                "Monogrey Livingroom", "Ninet", "081244232339"))
         }
         return items
     }

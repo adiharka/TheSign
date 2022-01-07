@@ -4,17 +4,34 @@
     android:layout_width="wrap_content"
     android:layout_height="280dp"
     android:orientation="vertical">
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="174dp"
-        android:layout_height="174dp"
-        android:src="@drawable/gal1"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="174dp"
+            android:layout_height="174dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/gal1">
+        </ImageView>
+        <ImageButton
+            android:id="@+id/favouriteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/favourite_btn"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="@id/img"
+            app:layout_constraintBottom_toBottomOf="@id/img"
+            android:background="@null"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1"
         android:visibility="gone"/>
+
     <TextView
         android:id="@+id/text"
         android:paddingHorizontal="10dp"
